@@ -1,0 +1,14 @@
+{
+  "name": "night-operator",
+  "version": "0.1.0",
+  "displayName": "Night Operator",
+  "description": "Authors LINE 13 episodes with six role agents and hard gates: LINE 13's own solver must prove exactly one solution, accessibility and safety checks must pass, and a human must approve before anything is sealed.",
+  "author": "S Logesh",
+  "tags": ["content-pipeline", "game", "amazon-nova", "kiroween"],
+  "highlights": [
+    "Six role agents: Folklorist, Puzzle Architect, Solver, Stage Director, Accessibility Examiner, Packager",
+    "Gate failures return work to the responsible role with the reason",
+    "Amazon Nova on Bedrock only, behind an adapter, with an offline deterministic dry-run"
+  ],
+  "defaultEnabled": false
+}

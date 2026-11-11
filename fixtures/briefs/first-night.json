@@ -1,0 +1,9 @@
+{
+  "briefId": "first-night",
+  "episodeId": "the-drowned-shift",
+  "seed": "night-operator-the-drowned-shift-v1",
+  "theme": "A flooded night shift: four callers who drowned at the exchange want to be put through.",
+  "callerCount": 4,
+  "destinationCount": 4,
+  "publishedAt": "2026-11-12T00:00:00.000Z"
+}

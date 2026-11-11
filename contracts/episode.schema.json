@@ -1,0 +1,269 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://line13.example/schemas/episode-manifest-v1.json",
+  "title": "LINE 13 Episode Manifest v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "episodeId",
+    "seed",
+    "title",
+    "callers",
+    "destinations",
+    "clues",
+    "constraints",
+    "intendedRoutes",
+    "cues",
+    "endings",
+    "assets",
+    "solverProof",
+    "publishedAt",
+    "integrity"
+  ],
+  "properties": {
+    "schemaVersion": { "const": "1.0.0" },
+    "episodeId": { "$ref": "#/$defs/nonEmptyString" },
+    "seed": { "$ref": "#/$defs/nonEmptyString" },
+    "title": { "$ref": "#/$defs/nonEmptyString" },
+    "callers": {
+      "type": "array",
+      "minItems": 1,
+      "items": { "$ref": "#/$defs/caller" }
+    },
+    "destinations": {
+      "type": "array",
+      "minItems": 1,
+      "items": { "$ref": "#/$defs/destination" }
+    },
+    "clues": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/clue" }
+    },
+    "constraints": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/constraint" }
+    },
+    "intendedRoutes": {
+      "type": "array",
+      "minItems": 1,
+      "items": { "$ref": "#/$defs/intendedRoute" }
+    },
+    "cues": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/cue" }
+    },
+    "endings": {
+      "type": "array",
+      "minItems": 1,
+      "items": { "$ref": "#/$defs/ending" }
+    },
+    "assets": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/asset" }
+    },
+    "solverProof": { "$ref": "#/$defs/solverProof" },
+    "publishedAt": { "type": "string", "format": "date-time" },
+    "integrity": { "$ref": "#/$defs/integrity" }
+  },
+  "$defs": {
+    "nonEmptyString": { "type": "string", "minLength": 1 },
+    "entityId": { "type": "string", "minLength": 1, "pattern": "^[a-z0-9][a-z0-9-]*$" },
+    "caller": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "displayName", "departedOn", "initialLineId", "clueIds", "subtitle"],
+      "properties": {
+        "id": { "$ref": "#/$defs/entityId" },
+        "displayName": { "$ref": "#/$defs/nonEmptyString" },
+        "departedOn": { "$ref": "#/$defs/nonEmptyString" },
+        "initialLineId": { "$ref": "#/$defs/entityId" },
+        "clueIds": { "type": "array", "items": { "$ref": "#/$defs/entityId" } },
+        "subtitle": { "$ref": "#/$defs/nonEmptyString" },
+        "voiceAssetId": { "$ref": "#/$defs/entityId" }
+      }
+    },
+    "destination": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "label", "description"],
+      "properties": {
+        "id": { "$ref": "#/$defs/entityId" },
+        "label": { "$ref": "#/$defs/nonEmptyString" },
+        "description": { "$ref": "#/$defs/nonEmptyString" }
+      }
+    },
+    "clue": {
+      "oneOf": [
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["id", "kind", "text"],
+          "properties": {
+            "id": { "$ref": "#/$defs/entityId" },
+            "kind": { "const": "text" },
+            "text": { "$ref": "#/$defs/nonEmptyString" }
+          }
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["id", "kind", "text", "excludedDestinationIds"],
+          "properties": {
+            "id": { "$ref": "#/$defs/entityId" },
+            "kind": { "const": "exclusion" },
+            "text": { "$ref": "#/$defs/nonEmptyString" },
+            "excludedDestinationIds": { "type": "array", "items": { "$ref": "#/$defs/entityId" } }
+          }
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["id", "kind", "text", "relatedCallerId", "relation"],
+          "properties": {
+            "id": { "$ref": "#/$defs/entityId" },
+            "kind": { "const": "relationship" },
+            "text": { "$ref": "#/$defs/nonEmptyString" },
+            "relatedCallerId": { "$ref": "#/$defs/entityId" },
+            "relation": { "enum": ["same-destination", "different-destination", "before", "after"] }
+          }
+        }
+      ]
+    },
+    "constraint": {
+      "oneOf": [
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["kind", "callerId", "destinationId"],
+          "properties": {
+            "kind": { "const": "required-route" },
+            "callerId": { "$ref": "#/$defs/entityId" },
+            "destinationId": { "$ref": "#/$defs/entityId" }
+          }
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["kind", "callerId", "destinationId"],
+          "properties": {
+            "kind": { "const": "forbidden-route" },
+            "callerId": { "$ref": "#/$defs/entityId" },
+            "destinationId": { "$ref": "#/$defs/entityId" }
+          }
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["kind", "callerIds"],
+          "properties": {
+            "kind": { "const": "distinct-destination" },
+            "callerIds": {
+              "type": "array",
+              "prefixItems": [{ "$ref": "#/$defs/entityId" }, { "$ref": "#/$defs/entityId" }],
+              "minItems": 2,
+              "maxItems": 2
+            }
+          }
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["kind", "beforeCallerId", "afterCallerId"],
+          "properties": {
+            "kind": { "const": "ordering" },
+            "beforeCallerId": { "$ref": "#/$defs/entityId" },
+            "afterCallerId": { "$ref": "#/$defs/entityId" }
+          }
+        }
+      ]
+    },
+    "intendedRoute": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["callerId", "destinationId", "order"],
+      "properties": {
+        "callerId": { "$ref": "#/$defs/entityId" },
+        "destinationId": { "$ref": "#/$defs/entityId" },
+        "order": { "type": "integer", "minimum": 1 }
+      }
+    },
+    "cue": {
+      "type": "object",
+      "required": ["id", "triggerEventType", "channel", "intensity", "durationMs", "reducedMotionAlternative", "silentAlternative"],
+      "properties": {
+        "id": { "$ref": "#/$defs/entityId" },
+        "triggerEventType": {
+          "enum": ["CALL_RINGING", "CALL_ANSWERED", "PLUG_INSERTED", "PLUG_REMOVED", "ROUTE_CONFIRMED", "ROUTE_REJECTED", "CALL_BLEED_STARTED", "CLUE_REVEALED", "LINE_POSSESSED", "FINALE_UNLOCKED", "ENDING_SELECTED"]
+        },
+        "channel": { "enum": ["lamp", "sound", "voice-filter", "environment", "transcript", "camera", "haptic", "ending-transition"] },
+        "intensity": { "type": "integer", "minimum": 1, "maximum": 3 },
+        "durationMs": { "type": "integer", "minimum": 0 },
+        "reducedMotionAlternative": { "enum": ["none", "fade", "static"] },
+        "silentAlternative": { "enum": ["none", "caption", "visual-signal"] }
+      }
+    },
+    "ending": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "label", "description", "requiredEventTypes"],
+      "properties": {
+        "id": { "$ref": "#/$defs/entityId" },
+        "label": { "$ref": "#/$defs/nonEmptyString" },
+        "description": { "$ref": "#/$defs/nonEmptyString" },
+        "requiredEventTypes": { "type": "array", "items": { "type": "string" } }
+      }
+    },
+    "asset": {
+      "oneOf": [
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["id", "kind", "source", "sha256", "transcript", "voiceEngine"],
+          "properties": {
+            "id": { "$ref": "#/$defs/entityId" },
+            "kind": { "const": "audio" },
+            "source": { "$ref": "#/$defs/nonEmptyString" },
+            "sha256": { "$ref": "#/$defs/nonEmptyString" },
+            "transcript": { "$ref": "#/$defs/nonEmptyString" },
+            "voiceEngine": { "enum": ["polly-neural", "polly-generative", "original"] }
+          }
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["id", "kind", "source", "sha256", "alt"],
+          "properties": {
+            "id": { "$ref": "#/$defs/entityId" },
+            "kind": { "const": "image" },
+            "source": { "$ref": "#/$defs/nonEmptyString" },
+            "sha256": { "$ref": "#/$defs/nonEmptyString" },
+            "alt": { "$ref": "#/$defs/nonEmptyString" }
+          }
+        }
+      ]
+    },
+    "solverProof": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["status", "solutionCount", "shortestSolutionLength", "unreachableNodeIds", "proofHash", "validatorVersion"],
+      "properties": {
+        "status": { "enum": ["verified", "draft", "rejected"] },
+        "solutionCount": { "type": "integer", "minimum": 0 },
+        "shortestSolutionLength": { "type": "integer", "minimum": 0 },
+        "unreachableNodeIds": { "type": "array", "items": { "$ref": "#/$defs/entityId" } },
+        "proofHash": { "$ref": "#/$defs/nonEmptyString" },
+        "validatorVersion": { "$ref": "#/$defs/nonEmptyString" }
+      }
+    },
+    "integrity": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["algorithm", "manifestHash"],
+      "properties": {
+        "algorithm": { "const": "SHA-256" },
+        "manifestHash": { "$ref": "#/$defs/nonEmptyString" }
+      }
+    }
+  }
+}

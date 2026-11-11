@@ -1,0 +1,20 @@
+{
+  "cues": [
+    { "id": "cue-ring-ruth", "triggerEventType": "CALL_RINGING", "channel": "lamp", "targetId": "line-03", "effect": "ring", "intensity": 1, "durationMs": 1800, "reducedMotionAlternative": "fade", "silentAlternative": "visual-signal" },
+    { "id": "cue-ring-amos", "triggerEventType": "CALL_RINGING", "channel": "lamp", "targetId": "line-07", "effect": "ring", "intensity": 1, "durationMs": 1800, "reducedMotionAlternative": "fade", "silentAlternative": "visual-signal" },
+    { "id": "cue-ring-ines", "triggerEventType": "CALL_RINGING", "channel": "lamp", "targetId": "line-11", "effect": "ring", "intensity": 1, "durationMs": 1800, "reducedMotionAlternative": "fade", "silentAlternative": "visual-signal" },
+    { "id": "cue-ring-tobias", "triggerEventType": "CALL_RINGING", "channel": "lamp", "targetId": "line-05", "effect": "ring", "intensity": 1, "durationMs": 1800, "reducedMotionAlternative": "fade", "silentAlternative": "visual-signal" },
+    { "id": "cue-voice-ruth", "triggerEventType": "CALL_ANSWERED", "channel": "voice-filter", "targetId": "caller-ruth", "effect": "distant-room", "intensity": 1, "durationMs": 2400, "reducedMotionAlternative": "none", "silentAlternative": "caption" },
+    { "id": "cue-voice-amos", "triggerEventType": "CALL_ANSWERED", "channel": "voice-filter", "targetId": "caller-amos", "effect": "telephone", "intensity": 1, "durationMs": 2400, "reducedMotionAlternative": "none", "silentAlternative": "caption" },
+    { "id": "cue-voice-ines", "triggerEventType": "CALL_ANSWERED", "channel": "voice-filter", "targetId": "caller-ines", "effect": "telephone", "intensity": 1, "durationMs": 2400, "reducedMotionAlternative": "none", "silentAlternative": "caption" },
+    { "id": "cue-voice-tobias", "triggerEventType": "CALL_ANSWERED", "channel": "voice-filter", "targetId": "caller-tobias", "effect": "telephone", "intensity": 1, "durationMs": 2400, "reducedMotionAlternative": "none", "silentAlternative": "caption" },
+    { "id": "cue-wrong-route-drop", "triggerEventType": "ROUTE_REJECTED", "channel": "environment", "effect": "voltage-drop", "intensity": 2, "durationMs": 900, "reducedMotionAlternative": "fade", "silentAlternative": "visual-signal" },
+    { "id": "cue-wrong-route-buzz", "triggerEventType": "ROUTE_REJECTED", "channel": "haptic", "patternMs": [80, 40, 80], "intensity": 2, "durationMs": 200, "reducedMotionAlternative": "none", "silentAlternative": "visual-signal" },
+    { "id": "cue-bleed-crossed", "triggerEventType": "CALL_BLEED_STARTED", "channel": "voice-filter", "targetId": "caller-amos", "effect": "crossed-line", "intensity": 2, "durationMs": 2000, "reducedMotionAlternative": "none", "silentAlternative": "caption" },
+    { "id": "cue-possessed-flicker", "triggerEventType": "LINE_POSSESSED", "channel": "lamp", "targetId": "line-11", "effect": "flicker", "intensity": 2, "durationMs": 1200, "reducedMotionAlternative": "fade", "silentAlternative": "visual-signal" },
+    { "id": "cue-confirm-settle", "triggerEventType": "ROUTE_CONFIRMED", "channel": "camera", "effect": "settle", "intensity": 1, "durationMs": 600, "reducedMotionAlternative": "fade", "silentAlternative": "none" },
+    { "id": "cue-finale-ritual", "triggerEventType": "FINALE_UNLOCKED", "channel": "environment", "effect": "ritual-reveal", "intensity": 3, "durationMs": 3200, "reducedMotionAlternative": "static", "silentAlternative": "caption" },
+    { "id": "cue-end-connect", "triggerEventType": "ENDING_SELECTED", "channel": "ending-transition", "endingId": "ending-first-connection", "effect": "connect", "intensity": 2, "durationMs": 2800, "reducedMotionAlternative": "fade", "silentAlternative": "caption" },
+    { "id": "cue-end-answers", "triggerEventType": "ENDING_SELECTED", "channel": "ending-transition", "endingId": "ending-the-line-answers", "effect": "reverse", "intensity": 2, "durationMs": 2800, "reducedMotionAlternative": "fade", "silentAlternative": "caption" }
+  ]
+}

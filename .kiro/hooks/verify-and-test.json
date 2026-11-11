@@ -1,0 +1,21 @@
+{
+  "version": "v1",
+  "hooks": [
+    {
+      "name": "Verify episode on save",
+      "description": "Any episode JSON under out/ or fixtures/episodes must pass LINE 13's contract, solver (exactly one solution), integrity and web import. Exit 1 reports the reason to the agent.",
+      "trigger": "PostFileSave",
+      "matcher": "(^|/)(out|fixtures/episodes)/[^/]+/?episode\\.json$",
+      "action": { "type": "command", "command": "node src/cli.js verify" },
+      "timeout": 60
+    },
+    {
+      "name": "Run tests on source save",
+      "description": "Saving a source, gate or test file runs the suite (offline, zero AWS calls).",
+      "trigger": "PostFileSave",
+      "matcher": "^(src|test|fixtures)/.*\\.(js|json)$",
+      "action": { "type": "command", "command": "npm test --silent" },
+      "timeout": 120
+    }
+  ]
+}

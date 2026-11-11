@@ -1,0 +1,15 @@
+{
+  "title": "The Short Shift",
+  "premise": "Two lamps wake on an empty board. Each caller knows exactly one place that will take them.",
+  "callers": [
+    { "id": "caller-june", "displayName": "June Harlow", "departedOn": "1930-01-09", "initialLineId": "line-02", "subtitle": "Put me through to the lamp room.", "backstory": "June trimmed the exchange lamps each dusk." },
+    { "id": "caller-wes", "displayName": "Wes Ardent", "departedOn": "1932-08-17", "initialLineId": "line-09", "subtitle": "Not the lamp room. Send me to the cellar.", "backstory": "Wes stored the spare cable in the cellar." }
+  ],
+  "destinations": [
+    { "id": "destination-lamp-room", "label": "Lamp Room", "description": "Warm glass and a smell of oil." },
+    { "id": "destination-cellar", "label": "Cellar", "description": "Cable drums sleep in the dark." }
+  ],
+  "endings": [
+    { "id": "ending-two-lamps", "label": "Two Lamps", "description": "Both lamps burn steady.", "requiredEventTypes": ["ROUTE_CONFIRMED", "FINALE_UNLOCKED"] }
+  ]
+}

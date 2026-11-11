@@ -1,0 +1,9 @@
+{
+  "briefId": "short-shift",
+  "episodeId": "the-short-shift",
+  "seed": "night-operator-short-shift-v1",
+  "theme": "Smallest valid episode: two callers, two destinations, one clean pass.",
+  "callerCount": 2,
+  "destinationCount": 2,
+  "publishedAt": "2026-11-12T00:00:00.000Z"
+}

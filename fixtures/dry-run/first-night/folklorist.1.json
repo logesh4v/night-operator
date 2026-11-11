@@ -1,0 +1,20 @@
+{
+  "title": "The Drowned Shift",
+  "premise": "The river took the night shift in 1931. Tonight four of them ring the board, each asking to be put through to the one place that will let them rest.",
+  "callers": [
+    { "id": "caller-ruth", "displayName": "Ruth Bell", "departedOn": "1931-10-31", "initialLineId": "line-03", "subtitle": "Operator, put me where the clock rang after midnight.", "backstory": "Ruth wound the tower clock. It stopped at 03:13 the night the river rose." },
+    { "id": "caller-amos", "displayName": "Amos Kettering", "departedOn": "1927-03-02", "initialLineId": "line-07", "subtitle": "Please, not the orchard. The trees listen there.", "backstory": "Amos sold apples at the orchard gate and heard his name whispered back by the branches." },
+    { "id": "caller-ines", "displayName": "Ines Vale", "departedOn": "1934-11-13", "initialLineId": "line-11", "subtitle": "Anywhere but the chapel. The floor is wet there.", "backstory": "Ines sang in the chapel choir. The flood reached the pews first." },
+    { "id": "caller-tobias", "displayName": "Tobias Marsh", "departedOn": "1929-06-21", "initialLineId": "line-05", "subtitle": "Connect me after Ines. I want a quiet room.", "backstory": "Tobias kept the morgue ledger. He believes the dead should wait their turn." }
+  ],
+  "destinations": [
+    { "id": "destination-bell-tower", "label": "Bell Tower", "description": "The clock stopped at 03:13." },
+    { "id": "destination-orchard", "label": "Orchard", "description": "Something there has learned your voice." },
+    { "id": "destination-morgue", "label": "Morgue", "description": "Cold, quiet, and every name is written down." },
+    { "id": "destination-chapel", "label": "Flooded Chapel", "description": "The pews are under black water." }
+  ],
+  "endings": [
+    { "id": "ending-first-connection", "label": "The First Connection", "description": "Every cord is home. A thirteenth lamp wakes behind you.", "requiredEventTypes": ["ROUTE_CONFIRMED", "FINALE_UNLOCKED"] },
+    { "id": "ending-the-line-answers", "label": "The Line Answers", "description": "A wrong cord taught the line your name. It rings for you.", "requiredEventTypes": ["ROUTE_REJECTED", "FINALE_UNLOCKED"] }
+  ]
+}

@@ -1,0 +1,15 @@
+{
+  "clues": [
+    { "id": "clue-june-lamp", "kind": "text", "text": "Put me through to the lamp room." },
+    { "id": "clue-wes-not-lamp", "kind": "exclusion", "text": "Not the lamp room. Send me to the cellar.", "excludedDestinationIds": ["destination-lamp-room"] }
+  ],
+  "clueOwners": { "caller-june": ["clue-june-lamp"], "caller-wes": ["clue-wes-not-lamp"] },
+  "constraints": [
+    { "kind": "required-route", "callerId": "caller-june", "destinationId": "destination-lamp-room" },
+    { "kind": "distinct-destination", "callerIds": ["caller-june", "caller-wes"] }
+  ],
+  "intendedRoutes": [
+    { "callerId": "caller-june", "destinationId": "destination-lamp-room", "order": 1 },
+    { "callerId": "caller-wes", "destinationId": "destination-cellar", "order": 2 }
+  ]
+}

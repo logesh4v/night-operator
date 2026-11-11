@@ -1,0 +1,16 @@
+{
+  "name": "night-operator",
+  "version": "0.1.0",
+  "description": "Kiro Crew app: six role agents that author, solve, caption and package a LINE 13 episode behind hard gates.",
+  "author": "S Logesh",
+  "license": "MIT",
+  "private": true,
+  "type": "module",
+  "bin": { "night-operator": "./src/cli.js" },
+  "scripts": {
+    "test": "node --test test/*.test.js",
+    "dry-run": "node src/cli.js run --brief first-night --dry-run --approve-as \"S Logesh\"",
+    "prove": "node scripts/prove.js"
+  },
+  "engines": { "node": ">=22.18.0" }
+}

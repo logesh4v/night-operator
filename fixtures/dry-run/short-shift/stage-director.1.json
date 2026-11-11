@@ -1,0 +1,8 @@
+{
+  "cues": [
+    { "id": "cue-ring-june", "triggerEventType": "CALL_RINGING", "channel": "lamp", "targetId": "line-02", "effect": "ring", "intensity": 1, "durationMs": 1800, "reducedMotionAlternative": "fade", "silentAlternative": "visual-signal" },
+    { "id": "cue-ring-wes", "triggerEventType": "CALL_RINGING", "channel": "lamp", "targetId": "line-09", "effect": "ring", "intensity": 1, "durationMs": 1800, "reducedMotionAlternative": "fade", "silentAlternative": "visual-signal" },
+    { "id": "cue-wrong-route", "triggerEventType": "ROUTE_REJECTED", "channel": "environment", "effect": "voltage-drop", "intensity": 2, "durationMs": 900, "reducedMotionAlternative": "fade", "silentAlternative": "visual-signal" },
+    { "id": "cue-end-lamps", "triggerEventType": "ENDING_SELECTED", "channel": "ending-transition", "endingId": "ending-two-lamps", "effect": "connect", "intensity": 2, "durationMs": 2400, "reducedMotionAlternative": "fade", "silentAlternative": "caption" }
+  ]
+}

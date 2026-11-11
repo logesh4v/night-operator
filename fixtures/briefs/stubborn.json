@@ -1,0 +1,10 @@
+{
+  "briefId": "stubborn",
+  "fixturesFrom": "first-night",
+  "episodeId": "the-stubborn-shift",
+  "seed": "night-operator-stubborn-v1",
+  "theme": "Negative case: the Puzzle Architect never fixes the ambiguity, so the pipeline must fail closed.",
+  "callerCount": 4,
+  "destinationCount": 4,
+  "publishedAt": "2026-11-12T00:00:00.000Z"
+}
