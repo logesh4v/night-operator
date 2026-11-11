@@ -119,7 +119,7 @@ ${nearby.map((n) => `| ${n.id} | status ${n.status}${n.reason ? ` (${n.reason})`
 
 ## 5. Test totals
 
-\`node --test test/\`: ${totals} (exit ${tests.status})
+\`node --test test/*.test.js\`: ${totals} (exit ${tests.status})
 
 ## What I skipped
 
