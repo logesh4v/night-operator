@@ -1,7 +1,7 @@
 // Generates docs/evidence/generated-episode-proof.md from REAL runs: nothing in the report is typed by hand
 // except the "skipped" section. Run after committing so the commit hash is the code that produced it.
 import { spawnSync } from 'node:child_process';
-import { copyFileSync, mkdirSync, readFileSync, rmSync, writeFileSync } from 'node:fs';
+import { copyFileSync, mkdirSync, readFileSync, readdirSync, rmSync, writeFileSync } from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { createClient } from '../src/model/adapter.js';
@@ -46,7 +46,7 @@ for (const id of ['short-shift', 'stubborn']) {
   nearby.push({ id, status: r.result.status, reason: r.result.reason ?? '', rewinds: r.result.events.filter((e) => e.type === 'rewind').length, solutions: r.result.report?.solutionCount ?? 'n/a', aws: r.client.awsCalls });
 }
 
-const tests = spawnSync(process.execPath, ['--test', 'test/'], { cwd: ROOT, encoding: 'utf8' });
+const tests = spawnSync(process.execPath, ['--test', ...readdirSync(path.join(ROOT, 'test')).filter((f) => f.endsWith('.test.js')).map((f) => `test/${f}`)], { cwd: ROOT, encoding: 'utf8' });
 const pick = (k) => (new RegExp(`^# ${k} (\\d+)`, 'm').exec(tests.stdout) ?? [])[1];
 const totals = `tests ${pick('tests')}, suites ${pick('suites')}, pass ${pick('pass')}, fail ${pick('fail')}, skipped ${pick('skipped')}`;
 const l13 = git('-C', line13Root(), 'rev-parse', '--short', 'HEAD');

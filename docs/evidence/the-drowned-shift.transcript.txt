@@ -1,0 +1,13 @@
+[1] ROLE   folklorist (attempt 1)
+[2] ROLE   puzzle-architect (attempt 1)
+[3] GATE   solver: FAIL
+         - AMBIGUOUS -> puzzle-architect: Ambiguous: 3 complete solutions, exactly 1 is required. Callers still free: caller-amos could go to destination-chapel / destination-morgue; caller-ines could go to destination-morgue / destination-orchard; caller-tobias could go to destination-chapel / destination-morgue / destination-orchard. Add an exclusion or relationship clue for one of them (and list it in clueOwners); do not remove callers.
+[4] REWIND solver -> puzzle-architect (AMBIGUOUS)
+[5] ROLE   puzzle-architect (attempt 2) <- feedback: AMBIGUOUS
+[6] GATE   solver: PASS
+[7] ROLE   stage-director (attempt 1)
+[8] GATE   accessibility: PASS
+[9] GATE   safety: PASS
+[10] ROLE   packager (attempt 1)
+[11] GATE   schema: PASS
+[12] GATE   human: PASS

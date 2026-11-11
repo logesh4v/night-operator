@@ -1,0 +1,393 @@
+{
+  "schemaVersion": "1.0.0",
+  "episodeId": "the-drowned-shift",
+  "seed": "night-operator-the-drowned-shift-v1",
+  "title": "The Drowned Shift",
+  "callers": [
+    {
+      "id": "caller-ruth",
+      "displayName": "Ruth Bell",
+      "departedOn": "1931-10-31",
+      "initialLineId": "line-03",
+      "subtitle": "Operator, put me where the clock rang after midnight.",
+      "clueIds": [
+        "clue-ruth-clock"
+      ]
+    },
+    {
+      "id": "caller-amos",
+      "displayName": "Amos Kettering",
+      "departedOn": "1927-03-02",
+      "initialLineId": "line-07",
+      "subtitle": "Please, not the orchard. The trees listen there.",
+      "clueIds": [
+        "clue-amos-orchard"
+      ]
+    },
+    {
+      "id": "caller-ines",
+      "displayName": "Ines Vale",
+      "departedOn": "1934-11-13",
+      "initialLineId": "line-11",
+      "subtitle": "Anywhere but the chapel. The floor is wet there.",
+      "clueIds": [
+        "clue-ines-chapel"
+      ]
+    },
+    {
+      "id": "caller-tobias",
+      "displayName": "Tobias Marsh",
+      "departedOn": "1929-06-21",
+      "initialLineId": "line-05",
+      "subtitle": "Connect me after Ines. I want a quiet room.",
+      "clueIds": [
+        "clue-tobias-after-ines",
+        "clue-tobias-quiet"
+      ]
+    }
+  ],
+  "destinations": [
+    {
+      "id": "destination-bell-tower",
+      "label": "Bell Tower",
+      "description": "The clock stopped at 03:13."
+    },
+    {
+      "id": "destination-orchard",
+      "label": "Orchard",
+      "description": "Something there has learned your voice."
+    },
+    {
+      "id": "destination-morgue",
+      "label": "Morgue",
+      "description": "Cold, quiet, and every name is written down."
+    },
+    {
+      "id": "destination-chapel",
+      "label": "Flooded Chapel",
+      "description": "The pews are under black water."
+    }
+  ],
+  "clues": [
+    {
+      "id": "clue-ruth-clock",
+      "kind": "text",
+      "text": "Put me where the clock rang after midnight."
+    },
+    {
+      "id": "clue-amos-orchard",
+      "kind": "exclusion",
+      "text": "Not the orchard. The trees listen there.",
+      "excludedDestinationIds": [
+        "destination-orchard"
+      ]
+    },
+    {
+      "id": "clue-ines-chapel",
+      "kind": "exclusion",
+      "text": "Anywhere but the chapel. The floor is wet there.",
+      "excludedDestinationIds": [
+        "destination-chapel"
+      ]
+    },
+    {
+      "id": "clue-tobias-after-ines",
+      "kind": "relationship",
+      "text": "Connect me after Ines.",
+      "relatedCallerId": "caller-ines",
+      "relation": "after"
+    },
+    {
+      "id": "clue-tobias-quiet",
+      "kind": "exclusion",
+      "text": "Not the orchard, and not the chapel. I want a quiet room.",
+      "excludedDestinationIds": [
+        "destination-orchard",
+        "destination-chapel"
+      ]
+    }
+  ],
+  "constraints": [
+    {
+      "kind": "required-route",
+      "callerId": "caller-ruth",
+      "destinationId": "destination-bell-tower"
+    },
+    {
+      "kind": "distinct-destination",
+      "callerIds": [
+        "caller-ruth",
+        "caller-amos"
+      ]
+    },
+    {
+      "kind": "distinct-destination",
+      "callerIds": [
+        "caller-ruth",
+        "caller-ines"
+      ]
+    },
+    {
+      "kind": "distinct-destination",
+      "callerIds": [
+        "caller-ruth",
+        "caller-tobias"
+      ]
+    },
+    {
+      "kind": "distinct-destination",
+      "callerIds": [
+        "caller-amos",
+        "caller-ines"
+      ]
+    },
+    {
+      "kind": "distinct-destination",
+      "callerIds": [
+        "caller-amos",
+        "caller-tobias"
+      ]
+    },
+    {
+      "kind": "distinct-destination",
+      "callerIds": [
+        "caller-ines",
+        "caller-tobias"
+      ]
+    }
+  ],
+  "intendedRoutes": [
+    {
+      "callerId": "caller-ruth",
+      "destinationId": "destination-bell-tower",
+      "order": 1
+    },
+    {
+      "callerId": "caller-amos",
+      "destinationId": "destination-chapel",
+      "order": 2
+    },
+    {
+      "callerId": "caller-ines",
+      "destinationId": "destination-orchard",
+      "order": 3
+    },
+    {
+      "callerId": "caller-tobias",
+      "destinationId": "destination-morgue",
+      "order": 4
+    }
+  ],
+  "cues": [
+    {
+      "id": "cue-ring-ruth",
+      "triggerEventType": "CALL_RINGING",
+      "channel": "lamp",
+      "targetId": "line-03",
+      "effect": "ring",
+      "intensity": 1,
+      "durationMs": 1800,
+      "reducedMotionAlternative": "fade",
+      "silentAlternative": "visual-signal"
+    },
+    {
+      "id": "cue-ring-amos",
+      "triggerEventType": "CALL_RINGING",
+      "channel": "lamp",
+      "targetId": "line-07",
+      "effect": "ring",
+      "intensity": 1,
+      "durationMs": 1800,
+      "reducedMotionAlternative": "fade",
+      "silentAlternative": "visual-signal"
+    },
+    {
+      "id": "cue-ring-ines",
+      "triggerEventType": "CALL_RINGING",
+      "channel": "lamp",
+      "targetId": "line-11",
+      "effect": "ring",
+      "intensity": 1,
+      "durationMs": 1800,
+      "reducedMotionAlternative": "fade",
+      "silentAlternative": "visual-signal"
+    },
+    {
+      "id": "cue-ring-tobias",
+      "triggerEventType": "CALL_RINGING",
+      "channel": "lamp",
+      "targetId": "line-05",
+      "effect": "ring",
+      "intensity": 1,
+      "durationMs": 1800,
+      "reducedMotionAlternative": "fade",
+      "silentAlternative": "visual-signal"
+    },
+    {
+      "id": "cue-voice-ruth",
+      "triggerEventType": "CALL_ANSWERED",
+      "channel": "voice-filter",
+      "targetId": "caller-ruth",
+      "effect": "distant-room",
+      "intensity": 1,
+      "durationMs": 2400,
+      "reducedMotionAlternative": "none",
+      "silentAlternative": "caption"
+    },
+    {
+      "id": "cue-voice-amos",
+      "triggerEventType": "CALL_ANSWERED",
+      "channel": "voice-filter",
+      "targetId": "caller-amos",
+      "effect": "telephone",
+      "intensity": 1,
+      "durationMs": 2400,
+      "reducedMotionAlternative": "none",
+      "silentAlternative": "caption"
+    },
+    {
+      "id": "cue-voice-ines",
+      "triggerEventType": "CALL_ANSWERED",
+      "channel": "voice-filter",
+      "targetId": "caller-ines",
+      "effect": "telephone",
+      "intensity": 1,
+      "durationMs": 2400,
+      "reducedMotionAlternative": "none",
+      "silentAlternative": "caption"
+    },
+    {
+      "id": "cue-voice-tobias",
+      "triggerEventType": "CALL_ANSWERED",
+      "channel": "voice-filter",
+      "targetId": "caller-tobias",
+      "effect": "telephone",
+      "intensity": 1,
+      "durationMs": 2400,
+      "reducedMotionAlternative": "none",
+      "silentAlternative": "caption"
+    },
+    {
+      "id": "cue-wrong-route-drop",
+      "triggerEventType": "ROUTE_REJECTED",
+      "channel": "environment",
+      "effect": "voltage-drop",
+      "intensity": 2,
+      "durationMs": 900,
+      "reducedMotionAlternative": "fade",
+      "silentAlternative": "visual-signal"
+    },
+    {
+      "id": "cue-wrong-route-buzz",
+      "triggerEventType": "ROUTE_REJECTED",
+      "channel": "haptic",
+      "patternMs": [
+        80,
+        40,
+        80
+      ],
+      "intensity": 2,
+      "durationMs": 200,
+      "reducedMotionAlternative": "none",
+      "silentAlternative": "visual-signal"
+    },
+    {
+      "id": "cue-bleed-crossed",
+      "triggerEventType": "CALL_BLEED_STARTED",
+      "channel": "voice-filter",
+      "targetId": "caller-amos",
+      "effect": "crossed-line",
+      "intensity": 2,
+      "durationMs": 2000,
+      "reducedMotionAlternative": "none",
+      "silentAlternative": "caption"
+    },
+    {
+      "id": "cue-possessed-flicker",
+      "triggerEventType": "LINE_POSSESSED",
+      "channel": "lamp",
+      "targetId": "line-11",
+      "effect": "flicker",
+      "intensity": 2,
+      "durationMs": 1200,
+      "reducedMotionAlternative": "fade",
+      "silentAlternative": "visual-signal"
+    },
+    {
+      "id": "cue-confirm-settle",
+      "triggerEventType": "ROUTE_CONFIRMED",
+      "channel": "camera",
+      "effect": "settle",
+      "intensity": 1,
+      "durationMs": 600,
+      "reducedMotionAlternative": "fade",
+      "silentAlternative": "none"
+    },
+    {
+      "id": "cue-finale-ritual",
+      "triggerEventType": "FINALE_UNLOCKED",
+      "channel": "environment",
+      "effect": "ritual-reveal",
+      "intensity": 3,
+      "durationMs": 3200,
+      "reducedMotionAlternative": "static",
+      "silentAlternative": "caption"
+    },
+    {
+      "id": "cue-end-connect",
+      "triggerEventType": "ENDING_SELECTED",
+      "channel": "ending-transition",
+      "endingId": "ending-first-connection",
+      "effect": "connect",
+      "intensity": 2,
+      "durationMs": 2800,
+      "reducedMotionAlternative": "fade",
+      "silentAlternative": "caption"
+    },
+    {
+      "id": "cue-end-answers",
+      "triggerEventType": "ENDING_SELECTED",
+      "channel": "ending-transition",
+      "endingId": "ending-the-line-answers",
+      "effect": "reverse",
+      "intensity": 2,
+      "durationMs": 2800,
+      "reducedMotionAlternative": "fade",
+      "silentAlternative": "caption"
+    }
+  ],
+  "endings": [
+    {
+      "id": "ending-first-connection",
+      "label": "The First Connection",
+      "description": "Every cord is home. A thirteenth lamp wakes behind you.",
+      "requiredEventTypes": [
+        "ROUTE_CONFIRMED",
+        "FINALE_UNLOCKED"
+      ]
+    },
+    {
+      "id": "ending-the-line-answers",
+      "label": "The Line Answers",
+      "description": "A wrong cord taught the line your name. It rings for you.",
+      "requiredEventTypes": [
+        "ROUTE_REJECTED",
+        "FINALE_UNLOCKED"
+      ]
+    }
+  ],
+  "assets": [],
+  "solverProof": {
+    "status": "verified",
+    "solutionCount": 1,
+    "shortestSolutionLength": 4,
+    "unreachableNodeIds": [],
+    "proofHash": "945fb5628d41784e",
+    "validatorVersion": "0.1.0"
+  },
+  "publishedAt": "2026-11-12T00:00:00.000Z",
+  "integrity": {
+    "algorithm": "SHA-256",
+    "manifestHash": "762d474075414df19086e9eb0fb6a4bb87b50c72748621d18fa4be930c3d992f"
+  }
+}
