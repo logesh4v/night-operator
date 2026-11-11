@@ -31,7 +31,7 @@
         "match": [
           "./.kiro/**",
           "./contracts/**",
-          "/Users/logesh/.kiro/crew/workspace/line-13/**"
+          "../line-13/**"
         ],
         "effect": "deny"
       }

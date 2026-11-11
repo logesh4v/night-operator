@@ -4,6 +4,34 @@
 
 Author: S Logesh. License: MIT. Built for the Kiroween 2026 "Best Kiro Crew App" bonus.
 
+Companion to **LINE 13**, which you can play without a login at https://d38usbzsyul1ro.cloudfront.net (code: https://github.com/logesh4v/line-13). Night Operator is a build-time tool, so it has no hosted URL of its own: the playable result of its work is that game.
+
+## Who it is for
+
+Anyone who wants a model to write puzzle content but needs a guarantee that every puzzle is fair. Here that is LINE 13's author and its players; the pattern (model writes, a deterministic solver judges, a human signs off) applies to any generated content with checkable rules.
+
+## Judge path: 60 seconds
+
+```bash
+git clone https://github.com/logesh4v/line-13.git
+git clone https://github.com/logesh4v/night-operator.git
+cd night-operator
+npm test                                                  # offline, zero AWS calls
+npm run dry-run                                           # runs the six roles; the first Puzzle Architect draft is rejected as ambiguous, the retry passes
+node src/cli.js verify out/the-drowned-shift/episode.json # re-checks the sealed file with LINE 13's own validator and solver
+```
+
+Then read the captured run: [generated-episode-proof.md](docs/evidence/generated-episode-proof.md) and its [transcript](docs/evidence/the-drowned-shift.transcript.txt).
+
+## How Kiro was used
+
+- **Custom Kiro agents**: six role agents in [`.kiro/agents`](.kiro/agents). The pipeline reads each model role's system prompt from its agent file, so the agent you open in Kiro and the call the pipeline makes cannot drift apart.
+- **Specs**: [`.kiro/specs/night-operator`](.kiro/specs/night-operator) (requirements, design, tasks).
+- **Steering**: [`.kiro/steering`](.kiro/steering) (product rules, AWS-only and safety).
+- **Hook**: [`.kiro/hooks/verify-and-test.json`](.kiro/hooks/verify-and-test.json).
+- **Kiro Crew**: the app was built in Kiro Crew and is itself a Crew-style multi-agent pipeline.
+- Evidence: [generated-episode-proof.md](docs/evidence/generated-episode-proof.md), and the LINE 13 repo's [Kiro evidence ledger](https://github.com/logesh4v/line-13/blob/main/docs/submission/kiro-evidence.md).
+
 ## The problem
 
 LINE 13 is a 1930s telephone-exchange occult routing puzzle. Its promise is that every episode is solvable, unambiguous and cannot trap the player. Generative models are good at ghosts and bad at constraint satisfaction: asked for a puzzle, they hand back one with three valid answers, or none. Night Operator is the production line that makes model-written episodes safe to ship.
@@ -65,11 +93,12 @@ A failing gate does not patch anything. It returns the work to the role that own
 
 ## Setup
 
-Requires Node >= 22.18 (type stripping, used to import LINE 13's TypeScript read-only). No `npm install` needed.
+Requires Node >= 22.18 (type stripping, used to import LINE 13's TypeScript read-only). No `npm install` needed. It needs a LINE 13 checkout, found by default in a folder named `line-13` next to this one.
 
 ```bash
-git clone <this repo> && cd night-operator
-export LINE13_ROOT=/path/to/line-13        # default: /Users/logesh/.kiro/crew/workspace/line-13
+git clone https://github.com/logesh4v/line-13.git
+git clone https://github.com/logesh4v/night-operator.git && cd night-operator
+# export LINE13_ROOT=/path/to/line-13      # only if line-13 is not next to this folder
 npm test                                    # offline, zero AWS calls
 npm run dry-run                             # publishes out/the-drowned-shift/ (reviewer recorded as S Logesh)
 node src/cli.js verify out/the-drowned-shift/episode.json

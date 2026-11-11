@@ -11,7 +11,7 @@ Given a short brief, produce one LINE 13 episode manifest that LINE 13 imports w
 - A gate failure goes back to the role that owns the failing part, with the reason. Gates never patch content themselves.
 - The human review gate is a person. The pipeline never writes its own approval.
 - Dry-run is the default. Output is deterministic: same brief and fixtures give a byte-identical manifest.
-- Read-only on `/Users/logesh/.kiro/crew/workspace/line-13`. Never write there.
+- Read-only on the sibling `../line-13` checkout (or `LINE13_ROOT`). Never write there.
 
 ## Tone
 Atmospheric, uncanny, restrained. No gore, no real people, no brands, no contact details. Reading grade 8 or lower.
